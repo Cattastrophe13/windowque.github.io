@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Number Form</title>
+    <link rel="stylesheet" href="stylerist.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Get Your Queue Number</h1>
+        <center>
+            <div class="service-selection">
+                <fieldset>
+                    <legend>Select Service:</legend>
+                    <label class="radio-label">
+                        <input type="radio" name="type" value="registrar" required> Registrar
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="type" value="cashier"> Cashier
+                    </label>
+                </fieldset>
+            </div>
+
+            <p id="selectedServiceText" class="hidden"></p> 
+
+            <div id="numberSelection" class="hidden">
+                <label for="number">Select Window number (1-4):</label>
+                <select id="number" required>
+                    <option value="">Choose a number</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+        
+            <p id="selectedNumberText" class="hidden"></p> 
+        </center>
+
+        <form id="registrationForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="02689b92-aa19-4ee7-9de3-69775da6f4c0">
+            <input type="hidden" name="redirect" value="https://yourwebsite.com/success.html">
+            <input type="hidden" name="type" id="formType">
+            <input type="hidden" name="queueNumber" id="formQueueNumber">
+            
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required>
+
+            <label for="studentNumber">Student Number:</label>
+            <input type="text" name="studentNumber" id="studentNumber" required>
+
+            <label for="course">Course:</label>
+            <input type="text" name="course" id="course" required>
+
+            <label for="yearLevel">Year Level:</label>
+            <input type="text" name="yearLevel" id="yearLevel" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" name="phone" id="phone" required>
+
+            <label for="date">Select Date:</label>
+            <input type="date" name="date" id="date" required>
+            <p id="operatingHours" class="hidden">The Cashier/Registrar will operate at 9 AM to 5 PM.</p>
+
+            <label for="purpose">Purpose:</label>
+            <textarea name="purpose" id="purpose" rows="4" required></textarea>
+
+            <input type="text" name="ICCT" style="display:none">
+
+            <button type="submit">Get Queue Number</button>
+        </form>
+
+        <div id="result" class="hidden">
+            <center>
+                <h2>Your Queue Number: <span id="queueNumber"></span></h2>
+                <div class="qrcode-container">
+                    <div id="qrcode" class="hidden"></div>
+                    <p>Scan the QR code for a copy of your form.</p>
+                </div>
+                <button id="downloadPDF" class="hidden">Download PDF</button>
+            </center>
+        </div>
+    </div>
+
+    <script src="scriptz.js"></script>
+</body>
+</html>
